@@ -1,8 +1,8 @@
 const db = require('./db/connection');
 const inquirer = require('inquirer');
-const cTable = require('console.table');
-const questions = require('./utils/questions');
+const { actionList } = require('./utils/questions');
 const { retrieveAllDept, retrieveAllRoles, retrieveAllEmployees } = require('./utils/showData');
+const { addDepartment, addRole, addEmployee } = require('./utils/addData');
 
 // Establishing a connection to the database
 db.connect(err => {
@@ -15,10 +15,9 @@ const userPrompt = () => {
     console.log('*************************************************');
     console.log('*                                               *');
     console.log('*                Welcome Manager                *');
-    console.log('*           What would you like to do?          *');
     console.log('*                                               *');
     console.log('*************************************************');
-    inquirer.prompt(questions)
+    inquirer.prompt(actionList)
         .then(answer => {
             if (answer.action == 'View all departments') {
                 retrieveAllDept();
@@ -26,12 +25,14 @@ const userPrompt = () => {
                 retrieveAllRoles();
             } else if (answer.action === 'View all employees') {
                 retrieveAllEmployees();
+            } else if (answer.action === 'Add a department') {
+                console.clear();
+                addDepartment();
             } else if (answer.action === 'End session') {
                 console.log('Connection to employee tracker has been terminated.');
                 db.end();
             }
 
-            userPrompt();
         })
 
 }

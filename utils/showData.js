@@ -5,6 +5,7 @@ const retrieveAllDept = () => {
 
     db.query(sql, (err, rows) => {
         if (err)() => console.log(err);
+        console.clear();
         console.table(rows);
     })
 }
@@ -14,6 +15,7 @@ const retrieveAllRoles = () => {
 
     db.query(sql, (err, rows) => {
         if (err)() => console.log(err);
+        console.clear();
         console.table(rows);
     })
 }
@@ -23,6 +25,7 @@ const retrieveAllEmployees = () => {
 
     db.query(sql, (err, rows) => {
         if (err)() => console.log(err);
+        console.clear();
         console.table(rows);
     })
 }
