@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jlusa101/employee-tracker#readme",
   "dependencies": {
     "inquirer": "^8.2.0",
+    "inquirer-loop": "^0.3.0",
     "mysql2": "^2.3.3"
   }
 }
