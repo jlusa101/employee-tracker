@@ -6,11 +6,12 @@ const cTable = require('console.table');
 
 // Establishing a connection to the database
 db.connect(err => {
-    if (err) throw err;
+    if (err)() => console.log(err);
     userPrompt();
 
 });
 
+// Function that begins the application by asking the user questions
 const userPrompt = () => {
     console.log('*************************************************');
     console.log('*                                               *');
@@ -50,11 +51,12 @@ const userPrompt = () => {
         })
 }
 
+// Function to retrieve all departments and display to the user
 const retrieveAllDept = () => {
     const sql = ` SELECT * FROM department`;
 
     db.query(sql, (err, rows) => {
-        if (err) throw err;
+        if (err)() => console.log(err);
         console.clear();
         console.table(rows)
         userPrompt();
@@ -62,11 +64,12 @@ const retrieveAllDept = () => {
 
 }
 
+// Function to retrieve all roles and display to the user
 const retrieveAllRoles = () => {
     const sql = ` SELECT * FROM roles`;
 
     db.query(sql, (err, rows) => {
-        if (err) throw err;
+        if (err)() => console.log(err);
         console.clear();
         console.table(rows)
         userPrompt();
@@ -75,11 +78,12 @@ const retrieveAllRoles = () => {
 
 }
 
+// Function to retrieve all employees and display to the user
 const retrieveAllEmployees = () => {
     const sql = ` SELECT * FROM employee`;
 
     db.query(sql, (err, rows) => {
-        if (err) throw err;
+        if (err)() => console.log(err);
         console.clear();
         console.table(rows)
         userPrompt();
@@ -88,11 +92,13 @@ const retrieveAllEmployees = () => {
 
 }
 
+// Function that asks the user what is the new department's name and then passes the answer to another function
 const addDepartment = () => {
     inquirer.prompt(deptAddition)
         .then(answers => insertDept(answers.newDepartment));
 }
 
+// Inserts the new department into the database
 const insertDept = (dept) => {
     const sql = `INSERT INTO department (name) VALUES (?)`;
 
@@ -103,11 +109,13 @@ const insertDept = (dept) => {
     })
 }
 
+// Function that asks the user questions about the new role and passes that information to another function
 const addRole = () => {
     inquirer.prompt(roleAddition)
         .then(answers => insertRole(answers.newRole, answers.salaryInput));
 }
 
+// Function that inserts the new role into the database
 const insertRole = (roleName, salary) => {
     const params = [roleName, salary];
     const departmentSql = `SELECT id, name FROM department`;
@@ -137,12 +145,13 @@ const insertRole = (roleName, salary) => {
 
 }
 
-
+// Function that asks the user questions about the new employee and passes that information to another function
 const addEmployee = () => {
     inquirer.prompt(employeeAddition)
         .then(answers => insertEmployee(answers.fName, answers.lName));
 }
 
+// Function that inserts the employee into the database
 const insertEmployee = (fname, lname) => {
     const params = [fname, lname];
     const roleSql = `SELECT title, id FROM roles`;
@@ -187,6 +196,7 @@ const insertEmployee = (fname, lname) => {
     })
 }
 
+// Function that asks the user which employee's role they wish to change and then updates it in the database
 const updateEmployeeRole = () => {
     const findEmployeeSql = `SELECT * FROM employee`;
     const getAllRolesSql = `SELECT title, id FROM roles`;
