@@ -25,6 +25,7 @@ The command to run is "SOURCE *file-name*.sql granted that you are inside the db
 * MySql
 
 ## Video
+https://watch.screencastify.com/v/DwHMBvpS8hTFNrhEGfBU
 
 ## Contribution
 Made by Joona Lusa
